@@ -13,6 +13,7 @@ The following is a sample Slack configuration in your .drone.yml file:
 ```yaml
 notify:
   hipchat:
+    image: gtaylor/drone-hipchat
     room_auth_token: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     room_id_or_name: 1234567
     message_notify: true
