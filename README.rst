@@ -48,7 +48,7 @@ Send a HipChat notification:
 
 .. code-block:: bash
 
-    docker run -i plugins/drone-hipchat <<EOF
+    docker run -i gtaylor/drone-hipchat <<EOF
     {
         "repo" : {
             "owner": "foo",

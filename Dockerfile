@@ -2,9 +2,10 @@
 #
 #     docker build --rm=true -t plugins/drone-hipchat .
 
-FROM python:3.5
+FROM gliderlabs/alpine:3.2
 MAINTAINER Greg Taylor <gtaylor@gc-taylor.com>
 
+RUN apk-install python3
 RUN mkdir /usr/src/drone-hipchat
 WORKDIR /usr/src/drone-hipchat
 
