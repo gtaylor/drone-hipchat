@@ -91,8 +91,17 @@ def get_message(payload):
     )
 
 
+def get_payload():
+    if len(sys.argv) > 2 and '--' in sys.argv:
+        payload_index = sys.argv.index('--') + 1
+        payload_str = ' '.join(sys.argv[payload_index:])
+    else:
+        payload_str = sys.stdin.read()
+    return json.loads(payload_str)
+
+
 def main():
-    payload = json.loads(sys.stdin.read())
+    payload = get_payload()
     vargs = payload["vargs"]
 
     data = {
@@ -102,9 +111,10 @@ def main():
         "color": get_message_color(payload),
         "notify": vargs.get("message_notify") == True,
     }
-    requests.post(
+    response = requests.post(
         ROOM_URL.format(room_id_or_name=vargs["room_id_or_name"]),
         data=data)
+    response.raise_for_status()
 
 if __name__ == "__main__":
     main()
