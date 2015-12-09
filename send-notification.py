@@ -1,8 +1,12 @@
 #!/usr/bin/env python
-import sys
-import json
+"""
+A simple script that runs within the drone-hipchat Docker container.
+Accepts input from Drone via stdin/args, sends messages to the room designated
+in the input.
+"""
 import datetime
 
+import drone
 import requests
 
 ROOM_URL = "https://api.hipchat.com/v2/room/{room_id_or_name}/notification"
@@ -91,17 +95,8 @@ def get_message(payload):
     )
 
 
-def get_payload():
-    if len(sys.argv) > 2 and '--' in sys.argv:
-        payload_index = sys.argv.index('--') + 1
-        payload_str = ' '.join(sys.argv[payload_index:])
-    else:
-        payload_str = sys.stdin.read()
-    return json.loads(payload_str)
-
-
 def main():
-    payload = get_payload()
+    payload = drone.plugin.get_input()
     vargs = payload["vargs"]
 
     data = {
