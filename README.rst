@@ -3,6 +3,8 @@ drone-hipchat
 
 Drone plugin for sending HipChat notifications
 
+**Note: This was an experimental bit of tinkering, and is no longer maintained.**
+
 
 Overview
 --------
